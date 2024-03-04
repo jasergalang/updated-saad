@@ -97,39 +97,50 @@
         </div>
     </div>
 {{-- end of browing by categories --}}
-                {{-- product contents --}}
-                @foreach ($properties->unique('id')->take(4) as $property)
-                {{-- Property card --}}
-                <div class="bg-white shadow rounded overflow-hidden group">
-                    <div class="relative">
-                        {{-- Property image --}}
-                        <img src="{{ asset('/storage/images/' . optional($property->image)->image_path) }}" alt="Property Image">
-                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-                            {{-- Your additional HTML or Blade code --}}
-                        </div>
-                    </div>
-                    {{-- Property details --}}
-                    <div class="pt-4 pb-3 px-4">
-                        <a href="#">
-                            <h4 class="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">{{ optional($property->description)->title }}</h4>
-                        </a>
-                        <div class="flex items-baseline mb-1 space-x-2 font-roboto">
-                            <p class="text-xl text-primary font-semibold">
-                                @if ($property->monthly_rate)
-                                    Contact agent for price
-                                @else
-                                    Price: {{ optional($property->rate)->monthly_rate }}
-                                @endif
-                            </p>
-                        </div>
-                    </div>
-                    {{-- end of property details --}}
-                    <a href="{{ route('viewproperty', ['id' => $property->id]) }}" class="block w-full py-1 text-center text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition">View</a>
-                </div>
-                {{-- end of property card --}}
-            @endforeach
 
-             {{-- end of products image --}}
+
+                <div class="container mb-10 grid grid-cols-3 gap-3">
+
+                    {{-- product contents --}}
+                @foreach ($properties->unique('id')->take(4) as $property)
+
+                {{-- Property card --}}
+
+                    <div class="bg-white shadow rounded overflow-hidden group">
+                        <div class="relative">
+                            {{-- Property image --}}
+                            <img src="{{ asset('/storage/images/' . optional($property->image)->image_path) }}" alt="Property Image" class="w-96 h-52">
+                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
+                                {{-- Your additional HTML or Blade code --}}
+                            </div>
+                        </div>
+
+                        {{-- Property details --}}
+                        <div class="pt-4 pb-3 px-4">
+                            <a href="#">
+                                <h4 class="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">{{ optional($property->description)->title }}</h4>
+                            </a>
+                            <div class="flex items-baseline mb-1 space-x-2 font-roboto">
+                                <p class="text-xl text-primary font-semibold">
+                                    @if ($property->monthly_rate)
+                                        Contact agent for price
+                                    @else
+                                        Price: {{ optional($property->rate)->monthly_rate }}
+                                    @endif
+                                </p>
+                            </div>
+                        </div>
+                        {{-- end of property details --}}
+
+                            {{-- button view --}}
+                        <a href="{{ route('viewproperty', ['id' => $property->id]) }}" class="block w-full py-1 text-center text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition">View</a>
+
+                    </div>
+                    {{-- end of property card --}}
+                @endforeach
+
+                 {{-- end of products image --}}
+                </div>
 
 
 
@@ -166,7 +177,7 @@
     </div>
 {{-- end of q&a ? --}}
 
-@include('layout.footer');
+@include('layout.footer')
 @endsection
 
 @section('scripts')

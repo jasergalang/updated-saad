@@ -231,7 +231,7 @@
 {{-- Go Button --}}
     <div class="container mx-auto p-6 bg-white">
         <a href="" class="text-center text-gray-700 hover:text-primary transition relative">
-        <button type="submit" class="bg-primary hover:bg-transparent border hover:border-primary text-white hover:text-primary font-bold py-2 px-4 rounded-md my-20 mx-auto block">
+        <button type="submit" class="uppercase bg-red-500 hover:bg-transparent border hover:border-primary text-white hover:text-primary font-bold py-2 px-4 rounded-md my-20 mx-auto block">
             Create listing and proceed to adding photos
         </button>
     </a>
@@ -242,5 +242,4 @@
 
 @include('layout.footer');
 @endsection
-
 

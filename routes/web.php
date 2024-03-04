@@ -49,7 +49,7 @@ Route::get('login',[AccountController::class, 'login'])->name('login');
 
 Route::prefix('properties')->group(function () {
     Route::get('/{property}/updateproperty', [PropertyController::class, 'updateproperty'])->name('property.updateproperty');
-    Route::put('/updateproperty', [PropertyController::class, 'updatepropertyform'])->name('properties.updatepropertyform');
+    Route::put('/updateproperty/{id}', [PropertyController::class, 'updatepropertyform'])->name('properties.updatepropertyform');
     Route::delete('/{property}', [PropertyController::class, 'destroy'])->name('properties.destroy');
 });
 

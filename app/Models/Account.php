@@ -35,7 +35,7 @@ class Account extends Authenticatable
 
     public function tenant()
     {
-        return $this->hasOne(Tenant::class, 'id');
+        return $this->hasOne(Tenant::class, 'accounts_id');
     }
 
     public function admninistrator()

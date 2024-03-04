@@ -109,7 +109,6 @@ class AccountController extends Controller
     }
     function ttregister(Request $request)
     {
-
         $this->validateRegistration($request, 'tenant');
 
         $account = Account::create([
@@ -124,7 +123,7 @@ class AccountController extends Controller
             return redirect(route('ttregister'))->with("fail", "Registration Failed!! Please Try Again.");
         }
         $tenant = new Tenant();
-        $tenant->account_id = $account->id;
+        $tenant->accounts_id = $account->id;
         $tenant->save();
 
         return redirect(route('login'))->with("success", "Registration Successful!!");

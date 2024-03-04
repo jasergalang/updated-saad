@@ -15,7 +15,7 @@ class Tenant extends Model
 
     public function account()
     {
-        return $this->belongsTo(Account::class);
+        return $this->belongsTo(Account::class, 'accounts_id');
     }
 
     public function contract()

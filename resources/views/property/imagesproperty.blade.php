@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="container mx-auto p-6 bg-white">
-                        <button type="submit" class="bg-primary hover:bg-transparent border hover:border-primary text-white hover:text-primary font-bold py-2 px-4 rounded-md mt-20 mx-auto block">
+                        <button type="submit" class="bg-red-500 hover:bg-transparent border hover:border-primary text-white hover:text-primary font-bold py-2 px-4 rounded-md mt-20 mx-auto block">
                             Upload Photos
                         </button>
                     </div>
