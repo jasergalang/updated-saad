@@ -41,15 +41,17 @@ Route::post('showproperty', [PropertyController::class, 'showrentals'])->name('s
 Route::get('/viewproperty/{id}', [PropertyController::class, 'viewproperty'])->name('viewproperty');
 Route::post('viewproperty', [PropertyController::class, 'viewone'])->name('viewone.post');
 
-
-
 Route::middleware(['web'])->group(function () {
     Route::post('login', [AccountController::class, 'loginPost'])->name('login.post');
 });
 
 Route::get('login',[AccountController::class, 'login'])->name('login');
 
-
+Route::prefix('properties')->group(function () {
+    Route::get('/{property}/updateproperty', [PropertyController::class, 'updateproperty'])->name('property.updateproperty');
+    Route::put('/updateproperty', [PropertyController::class, 'updatepropertyform'])->name('properties.updatepropertyform');
+    Route::delete('/{property}', [PropertyController::class, 'destroy'])->name('properties.destroy');
+});
 
 
 Route::get('landlordregister', [AccountController::class, 'landlordregister'])->name('landlordregister');
@@ -79,6 +81,10 @@ Route::prefix('admin')->group(function () {
     Route::patch('property/{id}', [AdminController::class, 'verifyproperty'])->name('admin.verify.property');
 });
 
+Route::get('aboutus', [AccountController::class, 'aboutus'])->name('aboutus');
+
+
+
 /*
 Route::get('rentals', function () {
     return view('rentals');
@@ -97,3 +103,4 @@ Route::get('adminpage', function () {
     return view('adminpage');
 });
  */
+

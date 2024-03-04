@@ -28,6 +28,10 @@ class AccountController extends Controller
     {
         return view('account.adminregister');
     }
+    public function aboutus()
+    {
+        return view('account.aboutus');
+    }
     function user()
     {
         return view('account.user');
@@ -82,7 +86,6 @@ class AccountController extends Controller
     function llregister(Request $request)
     {
         $this->validateRegistration($request, 'owner');
-
         $data = [
             'fname' => $request->fname,
             'lname' => $request->lname,
@@ -91,38 +94,37 @@ class AccountController extends Controller
             'password' => Hash::make($request->password),
             'roles' => 'owner',
         ];
-
         $account = Account::create($data);
 
         if (!$account) {
             return redirect(route('llregister'))->with("fail", "Registration Failed!! Please Try Again.");
         }
-
-        $owner = new Owner(['accounts_id' => $account->id]);
+        $ownerData = [
+            'accounts_id' => $account->id,
+            'facebook_link' => $request->facebook_link,
+        ];
+        $owner = new Owner($ownerData);
         $account->owner()->save($owner);
-
         return redirect(route('login'))->with("success", "Registration Successful!!");
     }
     function ttregister(Request $request)
     {
+
         $this->validateRegistration($request, 'tenant');
 
-        $data = [
+        $account = Account::create([
             'fname' => $request->fname,
             'lname' => $request->lname,
             'email' => $request->email,
             'contact' => $request->contact,
             'password' => Hash::make($request->password),
             'roles' => 'tenant',
-        ];
-
-        $account = Account::create($data);
-
+        ]);
         if (!$account) {
             return redirect(route('ttregister'))->with("fail", "Registration Failed!! Please Try Again.");
         }
-
-        $tenant = new Tenant(['id' => $account->id]);
+        $tenant = new Tenant();
+        $tenant->account_id = $account->id;
         $tenant->save();
 
         return redirect(route('login'))->with("success", "Registration Successful!!");
@@ -169,10 +171,13 @@ class AccountController extends Controller
 
     public function users()
     {
-            $accounts_id = auth()->id();
-            $owner = Owner::where('accounts_id', $accounts_id)->get();
-            $properties = $owner->properties;
+        $accounts_id = auth()->id();
+        $owners = Owner::where('accounts_id', $accounts_id)->get();
 
-            return view('account.user', compact('properties'));
+        $properties = $owners->flatMap(function ($owner) {
+            return $owner->properties;
+        })->all();
+
+        return view('account.user', compact('properties'));
     }
 }

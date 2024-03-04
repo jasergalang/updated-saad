@@ -28,11 +28,6 @@
                         </div>
                     </div>
 
-                    @if(session('success'))
-                        <div class="alert alert-success" id="successMessage">
-                            {{ session('success') }}
-                        </div>
-                    @endif
 
                     <div id="imageContainer" class="border p-4 grid grid-cols-3 gap-4">
                         <!-- Images will be dynamically added here -->
@@ -49,4 +44,19 @@
     </div>
 
     @include('layout.footer')
+@endsection
+
+@section('scripts')
+    @parent
+
+    @if(session('success'))
+        <script>
+            alert("{{ session('success') }}");
+        </script>
+    @endif
+    @if(session('error'))
+    <script>
+        alert("{{ session('error') }}");
+    </script>
+@endif
 @endsection

@@ -45,6 +45,7 @@ class PropertyController extends Controller
 
         return view('property.index', compact('properties'));
     }
+
     public function viewproperty($id)
     {
         $property = Property::with('amenity', 'address', 'rate', 'detail', 'description', 'image')->find($id);
@@ -193,6 +194,55 @@ class PropertyController extends Controller
     {
         return redirect()->route('viewproperty', ['id' => $id]);
     }
+
+    public function destroy(Property $property)
+    {
+        $property->delete();
+        return redirect()->back()->with('success', 'Property deleted successfully!');
+    }
+
+
+    public function updateproperty($id)
+    {
+        $property = Property::with( 'rate', 'description' )->find($id);
+        return view('property.updateproperty', compact('property'));
+    }
+
+
+    public function updatepropertyform(Request $request, $id)
+    {
+        // Find the property by ID
+        $property = Property::findOrFail($id);
+
+        // Update basic information
+        $property->update([
+            'property_type' => $request->input('property_type'),
+            'long_term' => $request->has('long_term'),
+            'short_term' => $request->has('short_term'),
+            'minimum_stay' => $request->input('minimum_stay'),
+        ]);
+        // Update or create property rates
+        $property->rate()->updateOrCreate(
+            [],
+            [
+                'daily_rate' => $request->input('daily_rate'),
+                'weekly_rate' => $request->input('weekly_rate'),
+                'monthly_rate' => $request->input('monthly_rate'),
+            ]
+        );
+        // Update or create property description
+        $property->description()->updateOrCreate(
+            [],
+            [
+                'title' => $request->input('title'),
+                'description' => $request->input('description'),
+            ]
+        );
+
+        // Redirect to a success page or return a response
+        return redirect()->route('property.updateproperty', ['property' => $property->id]);
+    }
+
 
 
 }

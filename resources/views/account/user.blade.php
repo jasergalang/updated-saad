@@ -37,15 +37,31 @@
                         <tr>
                             <th class="px-4 py-2 border-b border-r border-gray-400" style="width: 20%;">Photo</th>
                             <th class="px-4 py-2 border-b border-r border-gray-400" style="width: 35%;">Place Name</th>
+                            <th class="py-2 px-3 text-gray-800 border-b border-gray-400" style="width: 15%;">Update</th>
+                            <th class="py-2 px-3 text-gray-800 border-b border-gray-400" style="width: 15%;">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($properties as $property)
                         <tr>
                             <td class="px-4 py-2 border-b border-gray-400" style="width: 30%;">
-                                <img src="{{ $property->images->first()->url ?? '' }}" alt="Property Photo">
+                                <img src="{{ asset("/storage/images/". $property->image->image_path) }}" alt="Property Photo">
                             </td>
                             <td class="px-4 py-2 border-b border-gray-400" style="width: 30%;">{{ $property->description->description }}</td>
+                            <td class="px-5 py-2 border-b border-gray-400 text-center" style="width: 15%;">
+                                <a href="{{ route('property.updateproperty', $property) }}" class="bg-transparent rounded-md px-5 py-1 hover:bg-primary hover:border-b hover:border-t hover:border-primary hover:text-white font-bold">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                            </td>
+                            <td class="px-5 py-2 border-b border-gray-400 text-center" style="width: 15%;">
+                                <form action="{{ route('properties.destroy', $property) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="bg-transparent rounded-md px-5 py-1 hover:bg-primary hover:border-b hover:border-t hover:border-primary hover:text-white font-bold">
+                                        <i class="fa-solid fa-x"></i>
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
 

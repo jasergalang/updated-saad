@@ -14,7 +14,8 @@ class CreateTenantsTable extends Migration
     public function up()
     {
         Schema::create('tenants', function (Blueprint $table) {
-            $table->foreignId('id')->constrained('accounts')->onDelete('cascade');
+            $table->id();
+            $table->foreignId('accounts_id')->constrained('accounts')->onDelete('cascade');
             $table->timestamps();
         });
     }

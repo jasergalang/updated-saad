@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tenant extends Model
 {
+    protected $primaryKey = 'id';
     protected $table = 'tenants';
 
-    protected $fillable = ['id'];
+    protected $fillable = ['accounts_id'];
     use HasFactory;
 
     public function account()

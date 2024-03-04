@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rate extends Model
 {
+    protected $primaryKey = 'property_id';
     protected $table = 'rates';
     protected $fillable = [
         'property_id',

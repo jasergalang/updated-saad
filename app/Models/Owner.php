@@ -11,7 +11,7 @@ class Owner extends Model
     protected $primaryKey = 'id';
     protected $table = 'owners';
 
-    protected $fillable = ['id', 'accounts_id', 'verification_status'];
+    protected $fillable = ['id', 'accounts_id', 'verification_status', 'facebook_link'];
     use HasFactory;
     public function properties()
     {

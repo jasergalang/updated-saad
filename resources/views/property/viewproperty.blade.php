@@ -104,7 +104,7 @@
                     <div class="pt-3">
                         {{-- name --}}
                         <h2 class="text-xl font-semibold">
-                            Jhon Doe
+                            {{ $property->owner->account->fname }}{{ $property->owner->account->lname }}
                         </h2>
 
                         {{-- status --}}
@@ -114,7 +114,7 @@
 
                         {{-- number --}}
                         <h2 class="text-md font-semibold">
-                            +63 123 456 7890
+                            {{ $property->owner->account->contact }}
                         </h2>
                     </div>
                 </div>
@@ -125,7 +125,7 @@
                 {{-- etong link pre kukuhain nalang to dun sa list a property, mag lagay nalang ako dun
                     ng place kung saan nila pwede ilagay, tas dahil soc med to, pweding hindi sila mag
                     lagay, and yung only way to contact nlang sila is yung number  --}}
-                <a href="facebook link ni landlord" class=" bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex items-center justify-center">
+                <a href="{{ $property->owner->facebook_link }}" class=" bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex items-center justify-center">
                     <i class="fab fa-facebook-square mr-2"></i>
                     Facebook
                 </a>
@@ -135,7 +135,7 @@
 
         </div>
 
-    </div>
+        </div>
     {{-- end of user info --}}
     </div>
 {{-- viewing ends --}}

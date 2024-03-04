@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Description extends Model
 {
+    protected $primaryKey = 'property_id';
     protected $table = 'descriptions';
     protected $fillable = [
         'property_id',

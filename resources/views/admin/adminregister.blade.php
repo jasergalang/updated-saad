@@ -21,6 +21,11 @@
                     <input id="email" type="email" class="mt-1 p-2 w-full border rounded-md" name="email" value="{{ old('email') }}" required>
                 </div>
 
+                <div class="mb-3">
+                    <label for="facebook_link" class="form-label">Facebook Link</label>
+                    <input type="text" class="form-control" id="facebook_link" name="facebook_link" value="{{ old('facebook_link') }}" required>
+                </div>
+
                 <div class="mb-4">
                     <label for="password" class="block text-sm font-medium text-gray-600">Password</label>
                     <input id="password" type="password" class="mt-1 p-2 w-full border rounded-md" name="password" required>

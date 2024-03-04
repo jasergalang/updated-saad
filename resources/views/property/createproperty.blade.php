@@ -244,12 +244,3 @@
 @endsection
 
 
-@section('scripts')
-    @parent
-
-    @if(session('success'))
-        <script>
-            alert("{{ session('success') }}");
-        </script>
-    @endif
-@endsection

@@ -17,6 +17,7 @@ class CreateOwnersTable extends Migration
             $table->id();
             $table->foreignId('accounts_id')->constrained('accounts')->onDelete('cascade');
             $table->string('verification_status')->default('pending');
+            $table->string('facebook_link')->nullable();
             $table->timestamps();
         });
     }

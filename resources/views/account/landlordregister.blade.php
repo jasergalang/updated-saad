@@ -58,6 +58,13 @@
                 </div>
                 <div>
                     <div class="flex">
+                        <label class="text-gray-500 mb-2 block">Facebook Link</label>
+                        <p class="text-primary">*</p>
+                    </div>
+                    <input type="text" name="facebook_link" class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400" placeholder="Facebook Link">
+                </div>
+                <div>
+                    <div class="flex">
                         <label class="text-gray-500 mb-2 block">Password</label>
                         <p class="text-primary">*</p>
                     </div>
