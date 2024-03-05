@@ -26,6 +26,10 @@ class Owner extends Model
     {
         return $this->belongsToMany(Administrator::class, 'admin_manage_owners', 'owners_id', 'administrators_id');
     }
+    public function inquiries()
+    {
+        return $this->hasMany(Inquiry::class, 'owners_id');
+    }
 
 
 }

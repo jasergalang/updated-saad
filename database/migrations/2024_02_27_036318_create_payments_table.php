@@ -16,9 +16,8 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('contracts_id')->constrained('contracts')->onDelete('cascade');
-            $table->foreignId('owners_id')->constrained('owners')->onDelete('cascade');
-            $table->string('payment_method');
             $table->string('payment_status');
+            $table->string('payment_image')->nullable();
             $table->timestamps();
         });
     }

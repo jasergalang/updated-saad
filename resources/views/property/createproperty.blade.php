@@ -45,13 +45,31 @@
 
                 <div class="flex items-center">
                     <div class="text-base font-semibold mb-2">Minimum Stay:</div>
-                    <input type="text" name="minimum_stay" placeholder="ex: 2 months" class="rounded-md border border-gray-300 mx-7 w-96">
+                    <select id="stayDuration" class="ml-7 rounded-md border border-gray-300 p-2 w-96">
+                        <option>--Choose One--</option>
+                        <optgroup label="Long Term">
+                            <option value="1 Year">1 Year</option>
+                            <option value="6 months">6 months</option>
+                        </optgroup>
+                        <optgroup label="Short Term">
+                            <option value="3 Months">3 Months</option>
+                            <option value="2 Months">2 Months</option>
+                            <option value="1 Month">1 Month</option>
+                            <option value="3 Weeks">3 Weeks</option>
+                            <option value="2 Weeks">2 Weeks</option>
+                            <option value="1 Week">1 Week</option>
+                            <option value="6 Nights">6 Nights</option>
+                            <option value="5 Nights">5 Nights</option>
+                            <option value="4 Nights">4 Nights</option>
+                            <option value="3 Nights">3 Nights</option>
+                            <option value="2 Nights">2 Nights</option>
+                            <option value="1 Night">1 Night</option>
+                        </optgroup>
+                    </select>
                 </div>
 
                 <div class="text-xs text-gray-600 ml-36 mt-1">Tip: Indicate how long is your minimum required stay for this property.</div>
             </div>
-        </div>
-    </div>
     {{-- end of Basic Info --}}
 
     {{-- Rental Rates --}}

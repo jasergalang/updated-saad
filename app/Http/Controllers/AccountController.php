@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Owner;
 use App\Models\Tenant;
 use App\Models\Account;
@@ -48,10 +49,9 @@ class AccountController extends Controller
         ]);
 
         $credentials = $request->only('email', 'password');
-
         if (Auth::attempt($credentials)) {
             $account = Auth::user();
-
+            $request->session()->regenerate();
             switch ($account->roles) {
                 case 'owner':
                     $owner = Owner::where('accounts_id', $account->id)->first();
@@ -68,15 +68,12 @@ class AccountController extends Controller
                 case 'admin':
                     $administrator = Administrator::where('accounts_id', $account->id)->first();
                     if ($administrator) {
-                        return redirect()->route('adminpage')->with('administratorID', $administrator->id);
+                        return redirect()->route('adminverification')->with('administratorID', $administrator->id);
                     }
                     break;
                 default:
                     return back()->withInput()->withErrors(['email' => 'Invalid user role.']);
             }
-
-            // Redirect or handle other roles as needed...
-
             return back()->withInput()->withErrors(['email' => 'Invalid user role.']);
         }
 

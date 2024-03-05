@@ -15,7 +15,7 @@ class Payment extends Model
     }
     public function contract()
     {
-        return $this->belongsTo(Contract::class);
+        return $this->belongsTo(Contract::class, 'contracts_id');
     }
     public function owners()
     {

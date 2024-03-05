@@ -15,9 +15,10 @@ class CreateContractsTable extends Migration
     {
         Schema::create('contracts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tenants_id')->constrained('tenants')->onDelete('cascade');
-            $table->string('request_status');
-            $table->string('status');
+            $table->foreignId('inquiries_id')->constrained('inquiries')->onDelete('cascade');
+            $table->string('contracts_status')->default('active');
+            $table->string('payment_method');
+            $table->string('payment_agreement');
             $table->timestamps();
         });
     }

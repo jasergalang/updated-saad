@@ -9,7 +9,6 @@ class Tenant extends Model
 {
     protected $primaryKey = 'id';
     protected $table = 'tenants';
-
     protected $fillable = ['accounts_id'];
     use HasFactory;
 
@@ -18,9 +17,9 @@ class Tenant extends Model
         return $this->belongsTo(Account::class, 'accounts_id');
     }
 
-    public function contract()
+    public function inquiries()
     {
-        return $this->hasOne(Contract::class);
+        return $this->hasMany(Inquiry::class, 'tenants_id');
     }
 
     public function feedbacks()

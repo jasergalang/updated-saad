@@ -31,11 +31,6 @@ class Property extends Model
         return $this->belongsTo(Owner::class, 'owners_id');
     }
 
-    public function contracts()
-    {
-        return $this->hasMany(Contract::class);
-    }
-
     public function feedbacks()
     {
         return $this->hasMany(Feedback::class);
@@ -59,9 +54,9 @@ class Property extends Model
     {
         return $this->hasOne(Description::class, 'property_id');
     }
-    public function tenant()
+    public function inquiries()
     {
-        return $this->hasOne(Tenant::class);
+        return $this->hasMany(Inquiry::class, 'properties_id');
     }
 
     public function detail()

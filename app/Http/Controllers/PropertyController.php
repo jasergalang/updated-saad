@@ -56,18 +56,12 @@ class PropertyController extends Controller
     {
         $accounts_id = auth()->id();
 
-
         $owner = Owner::where('accounts_id', $accounts_id)->first();
-
         if (!$owner) {
 
             return redirect()->back()->with('error', 'Owner not found.');
         }
-
         $ownerID = $owner->id;
-
-
-
         // $request->validate([
         //     'property_type' => 'required|string',
         //     'long_term' => 'nullable|boolean',
@@ -201,20 +195,15 @@ class PropertyController extends Controller
         return redirect()->back()->with('success', 'Property deleted successfully!');
     }
 
-
     public function updateproperty($id)
     {
         $property = Property::with( 'rate', 'description' )->find($id);
         return view('property.updateproperty', compact('property'));
     }
-
-
     public function updatepropertyform(Request $request, $id)
     {
-        // Find the property by ID
         $property = Property::findOrFail($id);
 
-        // Update basic information
         $property->update([
             'property_type' => $request->input('property_type'),
             'long_term' => $request->has('long_term'),
@@ -242,7 +231,5 @@ class PropertyController extends Controller
         // Redirect to a success page or return a response
         return redirect()->route('property.updateproperty', ['property' => $property->id]);
     }
-
-
 
 }

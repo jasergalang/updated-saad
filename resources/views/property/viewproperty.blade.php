@@ -121,11 +121,11 @@
                     <div class="pt-3">
                         {{-- name --}}
                         <h2 class="text-xl font-semibold">
-                            {{ $property->owner->account->fname }}{{ $property->owner->account->lname }}
+                            {{ $property->owner->account->fname }} {{ $property->owner->account->lname }}
                         </h2>
 
                         {{-- status --}}
-                        <h4 class="text-sm">
+                        <h4 class="text-xl font-bold">
                             Landlord
                         </h4>
 
@@ -133,10 +133,12 @@
                         <h2 class="text-md font-semibold">
                             {{ $property->owner->account->contact }}
                         </h2>
+                        <h2 class="text-md font-semibold">
+                            {{ $property->owner->account->email }}
+                        </h2>
                     </div>
                 </div>
             </div>
-
             {{-- send inquiry section --}}
             <div class="col-span-2 text-center px-2 pb-3 overflow-hidden">
                 {{-- etong link pre kukuhain nalang to dun sa list a property, mag lagay nalang ako dun
@@ -147,6 +149,17 @@
                     Facebook
                 </a>
             </div>
+            <div class="col-span-2 text-center px-2 pb-3 overflow-hidden">
+                <form action="{{ route('inquire.post') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="properties_id" value="{{ $property->id }}">
+                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded flex items-center justify-center">
+                        <i class="fas fa-envelope mr-2"></i>
+                        Inquire
+                    </button>
+                </form>
+            </div>
+
 
             {{-- end of send inquiry section --}}
 
@@ -158,4 +171,18 @@
 {{-- viewing ends --}}
 
 @include('layout.footer');
+@endsection
+@section('scripts')
+    @parent
+
+    @if(session('success'))
+        <script>
+            alert("{{ session('success') }}");
+        </script>
+    @endif
+    @if(session('error'))
+    <script>
+        alert("{{ session('error') }}");
+    </script>
+@endif
 @endsection

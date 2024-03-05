@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\ContractController;
 use App\Http\Controllers\PropertyController;
 use Illuminate\Support\Facades\Input;
 /*
@@ -31,7 +32,7 @@ Route::get('/', function () {
 Route::get('createproperty', [PropertyController::class, 'createproperty'])->name('createproperty')->middleware('verified.owner');
 Route::post('createproperty', [PropertyController::class, 'propertylisting'])->name('propertylisting.post');
 
-Route::get('imagesproperty', [PropertyController::class, 'imagesproperty'])->name('imagesproperty');
+Route::get('imagesproperty', [PropertyController::class, 'imagesproperty'])->name('imagesproperty')->middleware('verified.owner');;
 Route::post('imagesproperty', [PropertyController::class, 'addimages'])->name('addimages.post');
 
 Route::get('showproperty', [PropertyController::class, 'showproperty'])->name('showproperty');
@@ -73,18 +74,31 @@ Route::post('adminregister', [AccountController::class, 'adregister'])->name('ad
 Route::get('index', [PropertyController::class, 'index'])->name('index');
 Route::post('index', [PropertyController::class, 'showindex'])->name('showindex.post')->middleware('verified.owner');
 
-Route::get('adminpage', [AdminController::class, 'adminpage'])->name('adminpage');
+Route::get('adminverification', [AdminController::class, 'adminverification'])->name('adminverification');
+Route::get('adminmanage', [AdminController::class, 'adminmanage'])->name('adminmanage');
 
 
 Route::prefix('admin')->group(function () {
     Route::patch('owner/{id}', [AdminController::class, 'verifylandlord'])->name('admin.verify.landlord');
     Route::patch('property/{id}', [AdminController::class, 'verifyproperty'])->name('admin.verify.property');
+    Route::delete('/owners/{ownerDelete}', [AdminController::class, 'destroyOwner'])->name('admin.destroy.owner');
+    Route::delete('/tenants/{tenantDelete}', [AdminController::class, 'destroyTenant'])->name('admin.destroy.tenant');
+    Route::delete('/properties/{propertyDelete}', [AdminController::class, 'destroyProperty'])->name('admin.destroy.property');
 });
 
 Route::get('aboutus', [AccountController::class, 'aboutus'])->name('aboutus');
 
 
+Route::get('inquiriesform', [ContractController::class, 'inquiriesform'])->name('inquiriesform');
 
+Route::post('inquire', [ContractController::class, 'inquire'])->name('inquire.post');
+
+Route::post('/inquiries/{id}/reject', [ContractController::class, 'rejectInquiry'])->name('inquiries.reject');
+
+Route::post('/inquiries/{id}/accept', [ContractController::class, 'acceptInquiry'])->name('inquiries.accept');
+
+Route::get('/tenantcontract', [ContractController::class, 'tenantcontract'])->name('tenantcontract');
+Route::post('/tenantcontract/{inquiries_id}', [ContractController::class, 'createcontract'])->name('createcontract');
 /*
 Route::get('rentals', function () {
     return view('rentals');
