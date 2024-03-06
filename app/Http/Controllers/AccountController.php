@@ -68,7 +68,7 @@ class AccountController extends Controller
                 case 'admin':
                     $administrator = Administrator::where('accounts_id', $account->id)->first();
                     if ($administrator) {
-                        return redirect()->route('adminverification')->with('administratorID', $administrator->id);
+                        return redirect()->route('adminInterface')->with('administratorID', $administrator->id);
                     }
                     break;
                 default:
@@ -172,6 +172,16 @@ class AccountController extends Controller
             return $owner->properties;
         })->all();
 
-        return view('account.user', compact('properties'));
+        $user = auth()->user();
+        $fname = $user->fname;
+        $lname = $user->lname;
+
+        return view('account.user', compact('properties', 'fname', 'lname'));
+    }
+
+    public function profile()
+    {
+        $accounts_id = auth()->id();
+        return view('account.profile');
     }
 }

@@ -13,7 +13,7 @@
         <div class="flex items-center">
             <img src="https://www.svgrepo.com/show/507442/user-circle.svg" class="w-40 mr-10" alt="">
             <h3 class="text-xl font-semibold">
-                {{$fname}} {{$lname}}
+                John Doe
             </h3>
             <i class="fa-solid fa-minus mx-4"></i>
             <h5 class="text-sm font-light text-gray-400 hover:text-primary cursor-pointer">
@@ -128,6 +128,7 @@
     </div>
 </div>
 {{-- account wrapper --}}
+
 @include('layout.footer');
 @endsection
 

@@ -9,37 +9,50 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    function adminverification()
+    function adminInterface()
     {
         $owners = Owner::all();
         $properties = Property::all();
-
-        return view('admin.adminverification', compact('owners', 'properties'));
+        $tenants = Tenant::with('account')->get();
+        return view('admin.adminInterface',compact('owners', 'properties','tenants'));
     }
-    function verifyOwner()
+    function landlordVerification()
+    {
+
+        return view('admin.landlordVerification', compact('owners'));
+    }
+    function propertyVerification()
     {
         $properties = Property::all();
 
-        return view('admin.adminverification', compact('owners', 'properties'));
+        return view('admin.propertyVerification', compact('properties'));
     }
-    function adminmanage()
+
+    function adminManageOwner()
     {
         $owners = Owner::with('account')->get();
-        $tenants = Tenant::with('account')->get();
-        $properties = Property::with('description')->get();
-
-        return view('admin.adminmanage', compact('owners', 'tenants', 'properties'));
-
+        return view('admin.adminManageOwner', compact('owners'));
     }
+    function adminManageProperty()
+    {
+        $properties = Property::with('description')->get();
+        return view('admin.adminManageProperty', compact('properties'));
+    }
+    function adminManageTenant()
+    {
+
+        return view('admin.adminManageTenant');
+    }
+
+
+
     public function verifylandlord($id)
     {
         $accounts_id = auth()->id();
         $owner = Owner::findOrFail($id);
 
-        // Use find method to retrieve the administrator
         $administrator = Administrator::where('accounts_id', $accounts_id)->first();
 
-        // Check if the administrator is found
         if ($administrator) {
             $owner->verification_status = 'verified';
             $owner->save();
@@ -54,6 +67,7 @@ class AdminController extends Controller
 
 
     }
+
 
     public function verifyproperty($id)
     {

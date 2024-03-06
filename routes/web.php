@@ -19,6 +19,9 @@ use Illuminate\Support\Facades\Input;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('lalagyan', function () {
+    return view('lalagyan');
+});
 /* Route::get('index', function () {
     return view('index');
 }); */
@@ -62,6 +65,9 @@ Route::prefix('tenant')->middleware(['auth', 'tenant'])->group(function () {
 
     Route::get('paymentform', [ContractController::class, 'paymentform'])->name('paymentform');
     Route::post('paymentformPost', [ContractController::class, 'paymentformPost'])->name('paymentformPost');
+
+    Route::get('profile',[AccountController::class, 'profile'])->name('profile');
+
 });
 
 
@@ -88,9 +94,7 @@ Route::prefix('owner')->middleware(['auth', 'owner'])->group(function () {
     Route::post('/tenantcontract/{inquiries_id}', [ContractController::class, 'createcontract'])->name('createcontract');
 
     Route::get('user',[AccountController::class, 'users'])->name('user');
-
 });
-
 
 // Routes for Administrator
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
@@ -102,11 +106,17 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::delete('/properties/{propertyDelete}', [AdminController::class, 'destroyProperty'])->name('admin.destroy.property');
 
 
-    Route::get('adminverification', [AdminController::class, 'adminverification'])->name('adminverification');
-    Route::get('adminmanage', [AdminController::class, 'adminmanage'])->name('adminmanage');
+    Route::get('landlordVerification', [AdminController::class, 'landlordVerification'])->name('admin.landlordVerification');
+    Route::get('propertyVerification', [AdminController::class, 'propertyVerification'])->name('propertyVerification');
+
+    Route::get('adminManageOwner', [AdminController::class, 'adminManageOwner'])->name('adminManageOwner');
+    Route::get('adminManageProperty', [AdminController::class, 'adminManageProperty'])->name('adminManageProperty');
+    Route::get('adminManageTenant', [AdminController::class, 'adminManageTenant'])->name('adminManageTenant');
 
     Route::get('adminregister', [AccountController::class, 'adminregister'])->name('adminregister');
     Route::post('adminregister', [AccountController::class, 'adregister'])->name('adminregister.post');
+
+    Route::get('adminInterface', [AdminController::class, 'adminInterface'])->name('adminInterface');
 });
 
 
