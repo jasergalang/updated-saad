@@ -16,6 +16,12 @@ class AdminController extends Controller
 
         return view('admin.adminverification', compact('owners', 'properties'));
     }
+    function verifyOwner()
+    {
+        $properties = Property::all();
+
+        return view('admin.adminverification', compact('owners', 'properties'));
+    }
     function adminmanage()
     {
         $owners = Owner::with('account')->get();

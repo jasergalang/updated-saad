@@ -179,13 +179,18 @@
 
 @include('layout.footer')
 @endsection
-
 @section('scripts')
     @parent
 
-    @if(session('error'))
+    @if(session('success'))
         <script>
-            alert("{{ session('error') }}");
+            alert("{{ session('success') }}");
         </script>
     @endif
+    @if(session('error'))
+    <script>
+        alert("{{ session('error') }}");
+    </script>
+@endif
 @endsection
+

@@ -56,7 +56,7 @@ class AccountController extends Controller
                 case 'owner':
                     $owner = Owner::where('accounts_id', $account->id)->first();
                     if ($owner) {
-                        return redirect()->route('index')->with('ownerID', $owner->id);
+                        return redirect()->route('user')->with('ownerID', $owner->id);
                     }
                     break;
                 case 'tenant':

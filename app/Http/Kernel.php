@@ -54,6 +54,9 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $routeMiddleware = [
+        'owner' => \App\Http\Middleware\OwnerMiddleware::class,
+        'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        'tenant' => \App\Http\Middleware\TenantMiddleware::class,
         'verified.owner' => \App\Http\Middleware\VerifyOwner::class,
         'authcheck' => \App\Http\Middleware\AuthCheck::class,
         'auth' => \App\Http\Middleware\Authenticate::class,

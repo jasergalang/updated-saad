@@ -153,22 +153,49 @@
                 <form action="{{ route('inquire.post') }}" method="post">
                     @csrf
                     <input type="hidden" name="properties_id" value="{{ $property->id }}">
-                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded flex items-center justify-center">
+                    <a id="download-docx" href="#" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded flex items-center justify-center cursor-pointer">
                         <i class="fas fa-envelope mr-2"></i>
                         Inquire
-                    </button>
+                    </a>
+
+                    <button id="upload-pdf" class="hidden border-b bg-white hover:bg-primary text-black hover:text-white font-bold py-2 px-4 w-full rounded mt-10">Upload PDF</button>
+                    <input type="file" id="pdf-input" class="hidden" accept="application/pdf">
                 </form>
             </div>
 
+            <script>
+                document.getElementById('download-docx').addEventListener('click', function(event) {
+                    event.preventDefault();
+
+                    var link = document.createElement('a');
+                    link.href = 'path/to/your/docx/file.docx';
+                    link.download = 'file.docx';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+
+                    document.getElementById('upload-pdf').classList.remove('hidden');
+                });
+
+                document.getElementById('upload-pdf').addEventListener('click', function() {
+                    document.getElementById('pdf-input').click();
+                });
+
+                document.getElementById('pdf-input').addEventListener('change', function() {
+                    var fileName = this.files[0].name;
+                    alert('Selected PDF file: ' + fileName);
+                });
+            </script>
 
             {{-- end of send inquiry section --}}
 
         </div>
 
-        </div>
-    {{-- end of user info --}}
     </div>
+    {{-- end of user info --}}
+</div>
 {{-- viewing ends --}}
+
 
 @include('layout.footer');
 @endsection

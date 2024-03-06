@@ -23,7 +23,7 @@
 
                 </div>
                     <div class="container flex items-center justify-center w-full my-2 space-x-14">
-                        <a href="adminpage" class="text-xl text-gray-200 hover:underline hover:text-white hover:shadow-lg transition">Verification</a>
+                        <a href="adminverification" class="text-xl text-gray-200 hover:underline hover:text-white hover:shadow-lg transition">Verification</a>
                         <a href="adminmanage" class="text-xl text-gray-200 hover:underline hover:text-white hover:shadow-lg transition">Manage</a>
                     </div>
                 </div>
@@ -173,13 +173,17 @@
 
 @include('layout.footer');
 @endsection
-
 @section('scripts')
     @parent
 
     @if(session('success'))
         <script>
             alert("{{ session('success') }}");
+        </script>
+    @endif
+    @if(session('error'))
+        <script>
+            alert("{{ session('error') }}");
         </script>
     @endif
 @endsection
