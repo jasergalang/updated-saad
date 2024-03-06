@@ -8,24 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 class Contract extends Model
 {
     protected $primaryKey = 'id';
-
     protected $table = 'contracts';
 
     protected $fillable = [
         'inquiries_id',
         'contracts_status',
         'payment_method',
-        'payment_agreement',
+        'lease_agreement',
+        'start_date',
+        'end_date',
     ];
+
     use HasFactory;
 
     public function payment()
     {
         return $this->hasMany(Payment::class, 'contracts_id');
-    }
-    public function maintenancecontract()
-    {
-        return $this->hasMany(MaintenanceContract::class, 'contracts_id');
     }
     public function inquiry()
     {

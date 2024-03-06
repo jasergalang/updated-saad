@@ -45,7 +45,7 @@
 
                 <div class="flex items-center">
                     <div class="text-base font-semibold mb-2">Minimum Stay:</div>
-                    <select id="stayDuration" class="ml-7 rounded-md border border-gray-300 p-2 w-96">
+                    <select id="stayDuration" name="minimum_stay" class="ml-7 rounded-md border border-gray-300 p-2 w-96">
                         <option>--Choose One--</option>
                         <optgroup label="Long Term">
                             <option value="1 Year">1 Year</option>
@@ -134,6 +134,19 @@
             <div class="flex items-center py-3">
                 <div class="text-base font-semibold mr-3 mb-2">City: </div>
                 <input type="text" name="city" placeholder="" class="rounded-md border border-gray-300 ml-60 w-96">
+            </div>
+        </div>
+    </div>
+{{-- end of Location and Address --}}
+
+{{-- Securityy Deposit--}}
+    <div class="container mx-auto p-6 bg-white">
+        <div class="text-lg font-bold mb-4 my-10 mx-20 border-b">Security Deposit</div>
+
+        <div class="mx-36 my-20">
+            <div class="flex items-center py-3">
+                <div class="text-base font-semibold mr-1 mb-2">Amount: </div>
+                <input type="text" name="security_deposit" placeholder="" class="rounded-md border border-gray-300 ml-12 w-96">
             </div>
         </div>
     </div>

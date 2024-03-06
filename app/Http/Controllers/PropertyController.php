@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\{
     DB, Validator, Storage
 };
 use App\Models\{
-    Rate, Owner, Detail, Address, Amenity, Property, Description, Image, Account
+    Rate, Owner, Detail, Address, Amenity, Property, Description, Image, Account, Maintenance
 };
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -142,6 +142,12 @@ class PropertyController extends Controller
         ]);
         $rateData['property_id'] = $propertyId;
         $rate = Rate::create($rateData);
+
+        $maintenanceData = $request->only([
+            'security_deposit'
+        ]);
+        $maintenanceData['property_id'] = $propertyId;
+        $maintenance = Maintenance::create($maintenanceData);
 
         // $amenityData = array_merge($request->only(['pool', 'gym', 'parking', 'security', 'balcony', 'pets_allowed']), ['property_id' => $property->id]);
         // foreach ($amenityData as $key => $value) {

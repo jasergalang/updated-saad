@@ -2,7 +2,7 @@
     <header class="py-1 shadow-sm bg-white">
         <div class="container flex items-center justify-between">
             {{-- logo --}}
-            <a href="#">
+            <a href="{{route('index')}}">
                 <img src="https://www.svgrepo.com/show/272028/houses-home.svg" alt="homelogo" class="w-16">
                 <h1 class="text-gray-700 hover:text-red-500 transision">FindFlat</h1>
             </a>

@@ -94,24 +94,34 @@ class ContractController extends Controller
         return redirect()->back()->with('success', 'Inquiry rejected successfully!');
 
     }
-
-    public function createcontract(Request $request, $inquiries_id)
+    public function createContract(Request $request, $inquiries_id)
     {
-
         $request->validate([
             'payment_method' => 'required|in:Digital,Physical',
             'payment_agreement' => 'required|in:Daily,Weekly,Monthly',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after:start_date',
         ]);
 
-
-        $contract = Contract::create([
+        $contractData = [
             'inquiries_id' => $inquiries_id,
             'payment_method' => $request->input('payment_method'),
             'payment_agreement' => $request->input('payment_agreement'),
-        ]);
+            'start_date' => $request->input('start_date'),
+            'end_date' => $request->input('end_date'),
+        ];
 
-        // You can customize the success message according to your needs
+        $contract = Contract::create($contractData);
+        session(['contract' => $contract]);
+
         return redirect()->back()->with('success', 'Contract created successfully');
     }
+    public function paymentform()
+    {
+        return view('tenant.paymentform');
+    }
+    public function paymentformPost()
+    {
 
+    }
 }

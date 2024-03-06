@@ -14,10 +14,9 @@ class CreateMaintenancesTable extends Migration
     public function up()
     {
         Schema::create('maintenances', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('property_id')->constrained('properties')->onDelete('cascade');
             $table->string('security_deposit');
-            $table->string('damages');
+            $table->string('damages')->nullable();
             $table->timestamps();
         });
     }

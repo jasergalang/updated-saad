@@ -79,7 +79,6 @@ class AccountController extends Controller
 
         return back()->withInput()->withErrors(['email' => 'Invalid email or password.']);
     }
-
     function llregister(Request $request)
     {
         $this->validateRegistration($request, 'owner');
@@ -164,7 +163,6 @@ class AccountController extends Controller
         Auth::logout();
         return redirect('/login')->with('success', 'Logged out successfully.');
     }
-
     public function users()
     {
         $accounts_id = auth()->id();

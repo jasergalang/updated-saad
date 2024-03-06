@@ -16,11 +16,9 @@ use Illuminate\Support\Facades\Input;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('welcome');
 });
-
 /* Route::get('index', function () {
     return view('index');
 }); */
@@ -37,7 +35,6 @@ Route::post('imagesproperty', [PropertyController::class, 'addimages'])->name('a
 
 Route::get('showproperty', [PropertyController::class, 'showproperty'])->name('showproperty');
 Route::post('showproperty', [PropertyController::class, 'showrentals'])->name('showrentals.post');
-
 
 Route::get('/viewproperty/{id}', [PropertyController::class, 'viewproperty'])->name('viewproperty');
 Route::post('viewproperty', [PropertyController::class, 'viewone'])->name('viewone.post');
@@ -99,6 +96,10 @@ Route::post('/inquiries/{id}/accept', [ContractController::class, 'acceptInquiry
 
 Route::get('/tenantcontract', [ContractController::class, 'tenantcontract'])->name('tenantcontract');
 Route::post('/tenantcontract/{inquiries_id}', [ContractController::class, 'createcontract'])->name('createcontract');
+
+Route::get('paymentform', [ContractController::class, 'paymentform'])->name('paymentform');
+Route::post('paymentformPost', [ContractController::class, 'paymentformPost'])->name('paymentformPost');
+
 /*
 Route::get('rentals', function () {
     return view('rentals');
